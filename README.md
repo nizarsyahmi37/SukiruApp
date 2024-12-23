@@ -81,7 +81,7 @@ An open marketplace that eliminates geographic barriers and promotes equitable o
 - [ ] Branding
 	- [ ] Brand Identity
 		- [x] Color
-		- [ ] Typography
+		- [x] Typography
 		- [ ] Logo
 		- [ ] Tagline
 		- [ ] Style
