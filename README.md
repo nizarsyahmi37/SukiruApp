@@ -80,13 +80,13 @@ An open marketplace that eliminates geographic barriers and promotes equitable o
 	- [ ] Why Now to Develop
 - [ ] Branding
 	- [ ] Brand Identity
-		- [ ] Color
+		- [x] Color
 		- [ ] Typography
 		- [ ] Logo
 		- [ ] Tagline
 		- [ ] Style
 	- [ ] Brand Assets
-		- [ ] Lettermark
+		- [x] Lettermark
 		- [ ] Icon
 		- [ ] Logo
 - [ ] Website
@@ -103,6 +103,31 @@ An open marketplace that eliminates geographic barriers and promotes equitable o
 		- [ ] Profile
 	- [ ] Telegram App
 		- [ ] Link to Web App?
+
+
+## Brand Identity
+
+### Color
+
+#### **Dark color:**
+- Hex: #191B28
+
+#### **Navy color:**
+- Hex: #22273B
+
+#### **Gold color:**
+- Hex: #9A7A51
+
+#### **Tan color:**
+- Hex: #D8CAB0
+
+#### **Light color:**
+- Hex: #F1F0EE
+
+
+### Typography
+
+Gatusho: [Gatusho Modern Font](https://elements.envato.com/gatusho-modern-font-VHUYUPT "Gatusho Modern Font")
 
 ## References
 
