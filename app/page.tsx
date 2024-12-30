@@ -1,5 +1,6 @@
 import { getProjectInfo } from "@/lib/versions"
-import LoginWithPrivy from "@/components/modules/login/LoginWithPrivy"
+import LoginWithPrivy from "@/components/modules/button/login/privy"
+import LoginWithFlow from "@/components/modules/button/login/flow"
 
 export default function Home() {
 	return (
@@ -8,6 +9,7 @@ export default function Home() {
 				{getProjectInfo().title}
 			</h1>
 			<LoginWithPrivy />
+			<LoginWithFlow />
 		</div>
 	)
 }

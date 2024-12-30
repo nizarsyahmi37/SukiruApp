@@ -2,6 +2,8 @@
 
 import { PrivyProvider } from "@privy-io/react-auth"
 import { ReactNode, useEffect, useState } from "react"
+import { AuthContextProvider } from '@/context/auth/flow'
+import '../../../flow-config'
 
 export default function Layout({
 	children,
@@ -24,42 +26,19 @@ export default function Layout({
 
 	return (
 		isAppInitialized ? (
-			<PrivyProvider
-				appId={appId!}
-				config={{
-					appearance: {
-						theme: "light",
-						accentColor: "#676FFF",
-						logo: "https://cryptologos.cc/logos/flow-flow-logo.png", // Replace with your logo
-					},
-					embeddedWallets: {
-						createOnLogin: "all-users",
-					},
-					defaultChain: {
-						id: 747,
-						name: "Flow",
-						network: "flow",
-						nativeCurrency: {
-							name: "Flow",
-							symbol: "FLOW",
-							decimals: 18,
+			<AuthContextProvider>
+				<PrivyProvider
+					appId={appId!}
+					config={{
+						appearance: {
+							theme: "light",
+							accentColor: "#676FFF",
+							logo: "https://cryptologos.cc/logos/flow-flow-logo.png", // Replace with your logo
 						},
-						rpcUrls: {
-							default: {
-								http: [
-									"https://mainnet.evm.nodes.onflow.org",
-								],
-							},
+						embeddedWallets: {
+							createOnLogin: "all-users",
 						},
-						blockExplorers: {
-							default: {
-								name: "Flowscan",
-								url: "https://evm.flowscan.io/",
-							},
-						},
-					},
-					supportedChains: [
-						{
+						defaultChain: {
 							id: 747,
 							name: "Flow",
 							network: "flow",
@@ -82,11 +61,36 @@ export default function Layout({
 								},
 							},
 						},
-					],
-				}}
-			>
-				{children}
-			</PrivyProvider>
+						supportedChains: [
+							{
+								id: 747,
+								name: "Flow",
+								network: "flow",
+								nativeCurrency: {
+									name: "Flow",
+									symbol: "FLOW",
+									decimals: 18,
+								},
+								rpcUrls: {
+									default: {
+										http: [
+											"https://mainnet.evm.nodes.onflow.org",
+										],
+									},
+								},
+								blockExplorers: {
+									default: {
+										name: "Flowscan",
+										url: "https://evm.flowscan.io/",
+									},
+								},
+							},
+						],
+					}}
+				>
+					{children}
+				</PrivyProvider>
+			</AuthContextProvider>
 		) : (
 			<div>
 				<h1>Application Error</h1>
