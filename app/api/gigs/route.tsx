@@ -10,9 +10,9 @@ export async function GET(request: Request) {
 	const id = url.searchParams.get("id")
 	const gig_name = url.searchParams.get("gig_name")
 	const gig_description = url.searchParams.get("gig_description")
-	const gig_skills = url.searchParams.get("gig_skills")
-	const gig_creator = url.searchParams.get("gig_description")
-	const gig_deadline = url.searchParams.get("gig_description")
+	const gig_skills = url.searchParams.get("gig_skills")?.split(',').map(Number)
+	const gig_creator = url.searchParams.get("gig_creator")
+	const gig_deadline = url.searchParams.get("gig_deadline")
   
 	let query
 	if (gig_name) {
@@ -36,5 +36,4 @@ export async function GET(request: Request) {
 	return new Response(JSON.stringify(response), {
 		headers: { "Content-Type": "application/json" }
 	})
-  }
-  
+}
