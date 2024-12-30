@@ -2,8 +2,9 @@
 
 import { PrivyProvider } from "@privy-io/react-auth"
 import { ReactNode, useEffect, useState } from "react"
-import { AuthContextProvider } from '@/context/auth/flow'
-import '../../../flow-config'
+import { AuthContextProvider as FlowProvider} from "@/context/auth/flow"
+import { AuthContextProvider as OkxProvider} from "@/context/auth/okx"
+import "../../../flow-config"
 
 export default function Layout({
 	children,
@@ -26,43 +27,20 @@ export default function Layout({
 
 	return (
 		isAppInitialized ? (
-			<AuthContextProvider>
+			<OkxProvider>
+				<FlowProvider>
 				<PrivyProvider
-					appId={appId!}
-					config={{
-						appearance: {
-							theme: "light",
-							accentColor: "#676FFF",
-							logo: "https://cryptologos.cc/logos/flow-flow-logo.png", // Replace with your logo
-						},
-						embeddedWallets: {
-							createOnLogin: "all-users",
-						},
-						defaultChain: {
-							id: 747,
-							name: "Flow",
-							network: "flow",
-							nativeCurrency: {
-								name: "Flow",
-								symbol: "FLOW",
-								decimals: 18,
+						appId={appId!}
+						config={{
+							appearance: {
+								theme: "light",
+								accentColor: "#676FFF",
+								logo: "https://cryptologos.cc/logos/flow-flow-logo.png", // Replace with your logo
 							},
-							rpcUrls: {
-								default: {
-									http: [
-										"https://mainnet.evm.nodes.onflow.org",
-									],
-								},
+							embeddedWallets: {
+								createOnLogin: "all-users",
 							},
-							blockExplorers: {
-								default: {
-									name: "Flowscan",
-									url: "https://evm.flowscan.io/",
-								},
-							},
-						},
-						supportedChains: [
-							{
+							defaultChain: {
 								id: 747,
 								name: "Flow",
 								network: "flow",
@@ -85,12 +63,37 @@ export default function Layout({
 									},
 								},
 							},
-						],
-					}}
-				>
-					{children}
-				</PrivyProvider>
-			</AuthContextProvider>
+							supportedChains: [
+								{
+									id: 747,
+									name: "Flow",
+									network: "flow",
+									nativeCurrency: {
+										name: "Flow",
+										symbol: "FLOW",
+										decimals: 18,
+									},
+									rpcUrls: {
+										default: {
+											http: [
+												"https://mainnet.evm.nodes.onflow.org",
+											],
+										},
+									},
+									blockExplorers: {
+										default: {
+											name: "Flowscan",
+											url: "https://evm.flowscan.io/",
+										},
+									},
+								},
+							],
+						}}
+					>
+						{children}
+					</PrivyProvider>
+				</FlowProvider>
+			</OkxProvider>
 		) : (
 			<div>
 				<h1>Application Error</h1>

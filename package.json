@@ -23,6 +23,7 @@
 	},
 	"dependencies": {
 		"@neondatabase/serverless": "^0.10.4",
+		"@okxconnect/ui": "^1.6.3",
 		"@onflow/fcl": "^1.13.4",
 		"@onflow/types": "^1.4.1",
 		"@privy-io/react-auth": "^1.98.4",
