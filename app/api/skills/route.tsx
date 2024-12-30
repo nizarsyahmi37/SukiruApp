@@ -27,5 +27,50 @@ export async function GET(request: Request) {
 	return new Response(JSON.stringify(response), {
 		headers: { "Content-Type": "application/json" }
 	})
-  }
+}
+
+export async function POST(request: Request) {
+	if (!process.env.DATABASE_URL) return new Response(null, { status: 500 })
   
+	const sql = neon(process.env.DATABASE_URL)
+	const url = new URL(request.url)
+	const skill_name = url.searchParams.get("skill_name")
+  
+	let response
+
+	if (skill_name) {
+		try {
+		  	// Check if skill exists
+			const existingSkill = await sql`SELECT 1 FROM sukiru_skills WHERE skill_name = ${skill_name} LIMIT 1`
+		
+			if (existingSkill.length > 0) {
+				response = {
+					success: false,
+					message: "Skill name already exists"
+				}
+			} else {
+				// Insert new skill
+				await sql`INSERT INTO sukiru_skills (skill_name) VALUES (${skill_name})`
+				response = {
+					success: true,
+					message: "Skill added successfully"
+				}
+			}
+		} catch (err) {
+			console.error(err)
+			response = {
+				success: false,
+				message: "An error occurred while adding the skill"
+			}
+		}
+	} else {
+		response = {
+			success: false,
+			message: "Skill name is missing",
+		}
+	}
+	
+	return new Response(JSON.stringify(response), {
+		headers: { "Content-Type": "application/json" }
+	})
+}

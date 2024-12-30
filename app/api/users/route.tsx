@@ -29,5 +29,62 @@ export async function GET(request: Request) {
 	return new Response(JSON.stringify(response), {
 		headers: { "Content-Type": "application/json" }
 	})
-  }
+}
+
+export async function POST(request: Request) {
+	if (!process.env.DATABASE_URL) return new Response(null, { status: 500 })
   
+	const sql = neon(process.env.DATABASE_URL)
+	const url = new URL(request.url)
+	const email = url.searchParams.get("email")
+	const username = url.searchParams.get("username")
+  
+	let response
+
+	if (email && username) {
+		try {
+		  	// Check if email and username exists
+			const existingUsername = await sql`SELECT 1 FROM sukiru_users WHERE username = ${username} LIMIT 1`
+			const existingEmail = await sql`SELECT 1 FROM sukiru_users WHERE email = ${email} LIMIT 1`
+		
+			if (existingUsername.length > 0 && existingEmail.length > 0) {
+				response = {
+					success: false,
+					message: "Username and email already exist"
+				}
+			} else if (existingUsername.length > 0) {
+				response = {
+					success: false,
+					message: "Username already exists"
+				}
+			} else if (existingEmail.length > 0) {
+				response = {
+					success: false,
+					message: "Email already exists"
+				}
+			} else {
+				// Insert new user
+				await sql`INSERT INTO sukiru_users (username, email) VALUES (${username}, ${email})`
+				response = {
+					success: true,
+					message: "User added successfully"
+				}
+			}
+		} catch (err) {
+			console.error(err)
+			response = {
+				success: false,
+				message: "An error occurred while adding the user"
+			}
+		}
+	} else {
+		response = {
+			success: false,
+			message: "Username and/or email are missing",
+		}
+	}
+	
+	return new Response(JSON.stringify(response), {
+		headers: { "Content-Type": "application/json" }
+	})
+}
