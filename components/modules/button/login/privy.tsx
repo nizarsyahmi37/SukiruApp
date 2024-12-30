@@ -3,7 +3,7 @@
 import { usePrivy } from "@privy-io/react-auth"
 
 export default function LoginWithPrivy() {
-	const { ready, authenticated, login, logout, user } = usePrivy()
+	const { ready, authenticated, login, logout, user, linkTelegram } = usePrivy()
 
 	if (!ready) return <p className="text-center text-gray-600">Loading...</p>
 
@@ -48,6 +48,13 @@ export default function LoginWithPrivy() {
 						</button>
 					</div>
 				)}
+										<button
+							onClick={linkTelegram}
+							className="button button-connect bg-green-500 text-white font-semibold w-full py-2 rounded-md hover:bg-green-600 transition"
+						>
+							Link Wallet
+						</button>
+
 			</div>
 		</div>
 	)
