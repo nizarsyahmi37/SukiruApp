@@ -1,6 +1,6 @@
 "use client"
 
-import { getUser } from "@/lib/helpers/database"
+import { getUserById } from "@/lib/helpers/database"
 import { getDate } from "@/lib/helpers/time"
 import { Gigs, Users } from "@/lib/types/database"
 import { PlusCircle } from "lucide-react"
@@ -33,7 +33,7 @@ export default function GigsListing({
 								{itm.gig_name}
 							</div>
 							<div className="font-light text-sm">
-								{getUser(users, itm.gig_creator)?.username} <span className={`px-2`}>|</span> <span className={`font-bold`}>Due on:</span> {getDate(itm.gig_deadline.toString())}
+								{getUserById(users, itm.gig_creator)?.username} <span className={`px-2`}>|</span> <span className={`font-bold`}>Due on:</span> {getDate(itm.gig_deadline.toString())}
 							</div>
 						</div>
 						<div className="font-bold text-xl flex items-center content-center">

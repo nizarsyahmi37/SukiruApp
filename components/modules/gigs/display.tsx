@@ -1,6 +1,6 @@
 "use client"
 
-import { getUser, getSkill } from "@/lib/helpers/database"
+import { getUserById, getSkillById } from "@/lib/helpers/database"
 import { getDate } from "@/lib/helpers/time"
 import { Gigs, Skills, Users } from "@/lib/types/database"
 import { useRouter } from "next/navigation"
@@ -22,7 +22,7 @@ export default function GigsDisplay({
 				{gigs[0].gig_name}
 			</div>
 			<div className="font-light text-sm">
-				{getUser(users, gigs[0].gig_creator)?.username} <span className={`px-2`}>|</span> <span className={`font-bold`}>Due on:</span> {getDate(gigs[0].gig_deadline.toString())}
+				{getUserById(users, gigs[0].gig_creator)?.username} <span className={`px-2`}>|</span> <span className={`font-bold`}>Due on:</span> {getDate(gigs[0].gig_deadline.toString())}
 			</div>
 			<div className="border border-primary my-2" />
 			<div>
@@ -50,7 +50,7 @@ export default function GigsDisplay({
 				<div className="flex gap-4 max-w-full flex-wrap">
 					{gigs[0].gig_skills.map((itm: number) => (
 						<div key={`skills-${itm}`} className="py-2 px-4 rounded-md border border-primary">
-							{getSkill(skills, itm)?.skill_name}
+							{getSkillById(skills, itm)?.skill_name}
 						</div>
 					))}
 				</div>
@@ -64,15 +64,15 @@ export default function GigsDisplay({
 					{gigs[0].gig_selected ? (
 						<div className="grid gap-1 py-2 px-4 rounded-md border border-primary">
 							<p className="font-bold cursor-pointer text-lg hover:underline" onClick={() => router.push(`/profile/${gigs[0].gig_selected}`)}>
-								{getUser(users, gigs[0].gig_selected)?.username}
+								{getUserById(users, gigs[0].gig_selected)?.username}
 							</p>
-							<a className="hover:bg-primary hover:text-background text-sm w-fit" href={`https://t.me/${getUser(users, gigs[0].gig_selected)?.telegram_username}`} target="_blank" title={getUser(users, gigs[0].gig_selected)?.username}>
-								@{getUser(users, gigs[0].gig_selected)?.telegram_username}
+							<a className="hover:bg-primary hover:text-background text-sm w-fit" href={`https://t.me/${getUserById(users, gigs[0].gig_selected)?.telegram_username}`} target="_blank" title={getUserById(users, gigs[0].gig_selected)?.username}>
+								@{getUserById(users, gigs[0].gig_selected)?.telegram_username}
 							</a>
 							<div className="text-sm flex gap-2 my-2">
-								{getUser(users, gigs[0].gig_selected)?.skills && getUser(users, gigs[0].gig_selected)?.skills.map((itm: number) => (
+								{getUserById(users, gigs[0].gig_selected)?.skills && getUserById(users, gigs[0].gig_selected)?.skills.map((itm: number) => (
 									<div key={`skills-${itm}`} className="py-1 px-2 rounded-md border border-primary">
-										{getSkill(skills, itm)?.skill_name}
+										{getSkillById(skills, itm)?.skill_name}
 									</div>
 								))}
 							</div>
@@ -93,15 +93,15 @@ export default function GigsDisplay({
 							<div key={`skills-${itm}`} className="rounded-lg border border-primary">
 								<div className="grid gap-1 px-4 py-2">
 									<p className="font-bold cursor-pointer text-lg hover:underline" onClick={() => router.push(`/profile/${itm}`)}>
-										{getUser(users, itm)?.username}
+										{getUserById(users, itm)?.username}
 									</p>
-									<a className="hover:bg-primary hover:text-background text-sm w-fit" href={`https://t.me/${getUser(users, itm)?.telegram_username}`} target="_blank" title={getUser(users, itm)?.username}>
-										@{getUser(users, itm)?.telegram_username}
+									<a className="hover:bg-primary hover:text-background text-sm w-fit" href={`https://t.me/${getUserById(users, itm)?.telegram_username}`} target="_blank" title={getUserById(users, itm)?.username}>
+										@{getUserById(users, itm)?.telegram_username}
 									</a>
 									<div className="text-sm flex gap-2 my-2">
-										{getUser(users, itm)?.skills && getUser(users, itm)?.skills.map((itm: number) => (
+										{getUserById(users, itm)?.skills && getUserById(users, itm)?.skills.map((itm: number) => (
 											<div key={`skills-${itm}`} className="py-1 px-2 rounded-md border border-primary">
-												{getSkill(skills, itm)?.skill_name}
+												{getSkillById(skills, itm)?.skill_name}
 											</div>
 										))}
 									</div>
