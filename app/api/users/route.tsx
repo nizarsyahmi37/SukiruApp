@@ -38,10 +38,14 @@ export async function POST(request: Request) {
 	const url = new URL(request.url)
 	const email = url.searchParams.get("email")
 	const username = url.searchParams.get("username")
+	const id = url.searchParams.get("id")
+	const type = url.searchParams.get("type")
   
 	let response
 
-	if (email && username) {
+	if (type === "update" && id && email) {
+		await sql`UPDATE sukiru_users SET email = ${email} WHERE id=${id}`
+	} else if (email && username) {
 		try {
 		  	// Check if email and username exists
 			const existingUsername = await sql`SELECT 1 FROM sukiru_users WHERE username = ${username} LIMIT 1`
