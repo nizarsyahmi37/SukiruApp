@@ -37,7 +37,7 @@ export function getGigBySelected(gigs: Gigs[], id: number) {
 }
 
 export function getGigByApplicant(gigs: Gigs[], id: number) {
-	const gig = gigs.filter(gig => gig.gig_applicant.includes(id))
+	const gig = gigs.filter(gig => gig.gig_applicant?.includes(id))
 	
 	return (gig)
 }

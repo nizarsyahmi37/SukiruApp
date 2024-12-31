@@ -3,7 +3,8 @@
 import axios from "axios"
 import { Users } from "@/lib/types/database"
 import { Email, Telegram, usePrivy, useUpdateAccount } from "@privy-io/react-auth"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 
 export default function ProfileCreate({
 	usr,
@@ -16,6 +17,8 @@ export default function ProfileCreate({
 	telegram: Telegram | undefined
 	wallet: string[]
 }) {
+	const router = useRouter()
+
 	const { linkTelegram, linkEmail } = usePrivy()
 	const {updateEmail} = useUpdateAccount({
 		onSuccess: (user, updateMethod, updatedAccount) => {
@@ -35,7 +38,7 @@ export default function ProfileCreate({
 	const handleUpdateEmail = async () => {
         try {
             const response = await axios.post(
-				`http://localhost:3000/api/users`,
+				`http://sukiruapp.vercel.app/api/users`,
 				{
 					type: "update",
 					id: usr[0].id,
@@ -47,6 +50,30 @@ export default function ProfileCreate({
             console.log(error);
         }
     }
+
+	const handleAddUser = async () => {
+        try {
+            const response = await axios.post(
+				`http://sukiruapp.vercel.app/api/users`,
+				{
+					type: "insert",
+					username: newUsername,
+					email: newEmail === undefined ? email?.address : newEmail,
+					telegram_username: newTelegram === undefined ? telegram?.username : newTelegram,
+					wallet: wallet[0]
+				}
+			)
+			console.log(response)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+	useEffect(() => {
+		if (newUsername && newUsername !== "") {
+			router.refresh()
+		}
+	}, [router, newUsername])
 
 	return (
 		<div className={`grid grid-cols-1 gap-2 py-8 px-4`}>
@@ -62,7 +89,12 @@ export default function ProfileCreate({
 					:
 				</div>
 				<div className="w-full">
-					<input required className="w-full border border-foreground rounded-md p-2" value={newUsername === undefined ? "" : newUsername} onChange={(e) => setNewUsername(e.target.value ? e.target.value : "")}/>
+					<div className="grid gap-4 grid-cols-[1fr_auto]">
+						<input required className="w-full border border-foreground rounded-md p-2" value={newUsername === undefined ? "" : newUsername} onChange={(e) => setNewUsername(e.target.value ? e.target.value : "")}/>
+						<div className="flex items-center content-center px-4 py-2 rounded-md cursor-pointer bg-foreground text-background hover:bg-primary hover:text-background" onClick={handleAddUser}>
+							{`Update username`}
+						</div>
+					</div>
 					<div className="flex gap-2 mt-2">
 						{usr.length > 0 && (
 							<div className="px-4 py-2 rounded-md border border-foreground" onClick={() => setNewUsername(usr[0]?.username)}>
@@ -90,7 +122,7 @@ export default function ProfileCreate({
 					:
 				</div>
 				<div className="grid gap-4 grid-cols-[1fr_auto]">
-					<input required className="w-full border border-foreground rounded-md p-2" value={newTelegram === undefined ? telegram && telegram.username?.toString() : newTelegram} onChange={(e) => setNewTelegram(e.target.value ? e.target.value : "")}/>
+					<input className="w-full border border-foreground rounded-md p-2" value={newTelegram === undefined ? telegram && telegram.username?.toString() : newTelegram} onChange={(e) => setNewTelegram(e.target.value ? e.target.value : "")}/>
 					<div className="flex items-center content-center px-4 py-2 rounded-md cursor-pointer bg-foreground text-background hover:bg-primary hover:text-background" onClick={linkTelegram}>
 						{telegram ? `Update telegram` : `Link telegram`}
 					</div>
