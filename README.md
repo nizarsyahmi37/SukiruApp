@@ -1,9 +1,15 @@
 # Sukiru
 
-## Things to have here on README before submission
-**One liner**: A short one-sentence description that clearly describes your project <br/>
-**Project description**: A short description of what you integrated with Flow, and how it was done <br/>
-**Team info**: A short description of your team and their social handles
+## One liner
+A Telegram mini app for secure, decentralized talent and gig matching.
+
+## Project description
+Sukiru integrates with Flow blockchain as a Telegram mini app, providing seamless talent and gig matching. Using Flow's smart contracts, it ensures trustless transactions, while NFT-based credentials verify expertise, creating a transparent and efficient ecosystem directly within Telegram.
+
+## Team info 
+
+### Nizar Syahmi Nazlan **[@nizarsyahmi37](https://x.com/nizarsyahmi37 "Nizar Syahmi Nazlan")**
+I’m a polymath with over 10 years of experience in technology, design, and strategy. I specialize in building blockchain solutions, designing user-friendly Web3 interfaces, and delivering innovative products. As a compulsive builder and passionate foodie, I love creating impactful solutions while enjoying life’s simple pleasures. One of the reasons why I've been active in Web3 space since 2015.
 
 ## Validation if this idea is good:
 
@@ -82,13 +88,13 @@ An open marketplace that eliminates geographic barriers and promotes equitable o
 	- [ ] Brand Identity
 		- [x] Color
 		- [x] Typography
-		- [ ] Logo
+		- [x] Logo
 		- [ ] Tagline
-		- [ ] Style
-	- [ ] Brand Assets
+		- [x] Style
+	- [x] Brand Assets
 		- [x] Lettermark
-		- [ ] Icon
-		- [ ] Logo
+		- [x] Icon
+		- [x] Logo
 - [ ] Website
 	- [ ] Landing page
 	- [ ] About page
@@ -101,8 +107,12 @@ An open marketplace that eliminates geographic barriers and promotes equitable o
 	- [ ] Web App
 		- [ ] Dashboard
 		- [ ] Profile
-	- [ ] Telegram App
-		- [ ] Link to Web App?
+		- [ ] Login
+			- [ ] Privy
+			- [ ] OKX
+			- [ ] Flow
+	- [x] Telegram App
+		- [x] Link to Web App?
 
 
 ## Brand Identity
