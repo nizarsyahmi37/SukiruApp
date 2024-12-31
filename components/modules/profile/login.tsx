@@ -31,7 +31,7 @@ export default function ProfileLogin({
 		check()
 	}, [authenticated, user]);
 
-	if (!authenticated && user?.email?.address) {
+	if (authenticated && user?.email?.address) {
 		const usrEmail = getUserByEmail(users, user?.email?.address)
 		const usrTg = getUserByTelegram(users, user?.telegram?.username ? user?.telegram?.username : "")
 		const usrWal = getUserByWallets(users, user?.wallet?.address ? [user?.wallet?.address] : [""])
