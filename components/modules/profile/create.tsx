@@ -39,7 +39,7 @@ export default function ProfileCreate({
 				{
 					type: "update",
 					id: usr[0].id,
-					email: newEmail === undefined ? email.address : newEmail
+					email: newEmail === undefined ? email?.address : newEmail
 				}
 			)
 			console.log(response)
@@ -78,7 +78,7 @@ export default function ProfileCreate({
 					:
 				</div>
 				<div className="grid gap-4 grid-cols-[1fr_auto]">
-					<input required className="w-full border border-foreground rounded-md p-2" value={newEmail === undefined ? email.address : newEmail} onChange={(e) => setNewEmail(e.target.value ? e.target.value : "")}/>
+					<input required className="w-full border border-foreground rounded-md p-2" value={newEmail === undefined ? email?.address : newEmail} onChange={(e) => setNewEmail(e.target.value ? e.target.value : "")}/>
 					<div className="flex items-center content-center px-4 py-2 rounded-md cursor-pointer bg-foreground text-background hover:bg-primary hover:text-background" onClick={email ? updateEmail : linkEmail}>
 						{email ? `Update email` : `Link email`}
 					</div>
