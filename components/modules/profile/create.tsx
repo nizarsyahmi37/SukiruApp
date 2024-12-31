@@ -7,15 +7,11 @@ import { useState } from "react"
 
 export default function ProfileCreate({
 	usr,
-	usrTg,
-	usrWal,
 	email,
 	telegram,
 	wallet
 } : {
 	usr: Users[]
-	usrTg: Users[]
-	usrWal: Users[]
 	email: Email
 	telegram: Telegram | undefined
 	wallet: string[]
@@ -71,16 +67,6 @@ export default function ProfileCreate({
 						{usr.length > 0 && (
 							<div className="px-4 py-2 rounded-md border border-foreground" onClick={() => setNewUsername(usr[0]?.username)}>
 								{usr[0]?.username}
-							</div>
-						)}
-						{usrTg.length > 0 && (
-							<div className="px-4 py-2 rounded-md border border-foreground" onClick={() => setNewUsername(usrTg[0]?.username)}>
-								{usrTg[0]?.username}
-							</div>
-						)}
-						{usrWal.length > 0 && (
-							<div className="px-4 py-2 rounded-md border border-foreground" onClick={() => setNewUsername(usrWal[0]?.username)}>
-								{usrWal[0]?.username}
 							</div>
 						)}
 					</div>

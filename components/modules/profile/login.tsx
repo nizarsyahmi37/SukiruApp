@@ -8,7 +8,7 @@ import LoginWithOKX from "@/components/modules/button/login/okx"
 import LoginWithPrivy from "@/components/modules/button/login/privy"
 import ProfileDisplay from "./display"
 import { Gigs, Skills, Users } from "@/lib/types/database"
-import { getUserByEmail, getUserByTelegram, getUserByWallets } from "@/lib/helpers/database"
+import { getGigByApplicant, getGigBySelected, getUserByEmail, getUserByTelegram, getUserByWallets } from "@/lib/helpers/database"
 import ProfileCreate from "./create"
 
 export default function ProfileLogin({
@@ -32,18 +32,21 @@ export default function ProfileLogin({
 	}, [authenticated, user]);
 
 	if (authenticated && user?.email?.address) {
-		const usr = getUserByEmail(users, user?.email?.address)
+		const usrEmail = getUserByEmail(users, user?.email?.address)
 		const usrTg = getUserByTelegram(users, user?.telegram?.username ? user?.telegram?.username : "")
 		const usrWal = getUserByWallets(users, user?.wallet?.address ? [user?.wallet?.address] : [""])
-		if (usr || usrTg || usrWal) {
+		const usr = usrEmail ? usrEmail : usrTg ? usrTg : usrWal ? usrWal : undefined
+		if (usr) {
+			const applicant = getGigByApplicant(gigs, usr?.id)
+			const selected = getGigBySelected(gigs, usr?.id)
 			return (
 				<div>
 					<ProfileDisplay
-						usr={usr}
+						usr={usr as Users}
 						users={users}
 						skills={skills}
-						applied={gigs}
-						selected={gigs}
+						applied={[applicant] as Gigs[]}
+						selected={[selected] as Gigs[]}
 					/>
 				</div>
 			)
@@ -52,8 +55,6 @@ export default function ProfileLogin({
 				<div>
 					<ProfileCreate
 						usr={usr || []}
-						usrTg={usrTg || []}
-						usrWal={usrWal || []}
 						email={user?.email}
 						telegram={user?.telegram}
 						wallet={user?.wallet?.address ? [user?.wallet?.address] : [""]}
