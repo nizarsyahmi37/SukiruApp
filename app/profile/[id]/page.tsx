@@ -21,7 +21,7 @@ export default async function Page({
 	return (
 		<div>
 			<ProfileDisplay
-				user={user[0]}
+				usr={user[0]}
 				users={users}
 				skills={skills}
 				applied={applied}
