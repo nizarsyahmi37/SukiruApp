@@ -3,6 +3,7 @@
 import { getUserById } from "@/lib/helpers/database"
 import { getDate } from "@/lib/helpers/time"
 import { Gigs, Users } from "@/lib/types/database"
+import { usePrivy } from "@privy-io/react-auth"
 import { PlusCircle } from "lucide-react"
 import { useRouter } from "next/navigation"
 
@@ -14,6 +15,7 @@ export default function GigsListing({
 	users: Users[]
 }) {
 	const router = useRouter()
+	const { authenticated, user } = usePrivy()
 
 	return (
 		<div className={`grid grid-cols-1 gap-4 p-4`}>
@@ -21,11 +23,13 @@ export default function GigsListing({
 				Gigs
 			</div>
 			<div className="grid gap-4">
-				<div className={`p-4 border border-foreground rounded-lg cursor-pointer duration-150 ease-in-out group bg-primary text-background font-bold hover:scale-[101%] hover:border-primary`} onClick={() => router.push(`/gigs/listing`)}>
-					<div className="mx-auto w-fit text-center content-center items-center flex gap-2 group-hover:scale-[101%] group-hover:border-primary">
-						<PlusCircle /> Add new gig
+				{authenticated && user && (
+					<div className={`p-4 border border-foreground rounded-lg cursor-pointer duration-150 ease-in-out group bg-primary text-background font-bold hover:scale-[101%] hover:border-primary`} onClick={() => router.push(`/gigs/listing`)}>
+						<div className="mx-auto w-fit text-center content-center items-center flex gap-2 group-hover:scale-[101%] group-hover:border-primary">
+							<PlusCircle /> Add new gig
+						</div>
 					</div>
-				</div>
+				)}
 				{gigs.map((itm: Gigs) => (
 					<div key={`listing-${itm.id}`} className={`grid grid-cols-[1fr_auto] p-4 border border-foreground rounded-lg cursor-pointer duration-150 ease-in-out hover:scale-[101%] hover:border-primary`}>
 						<div onClick={() => router.push(`/gigs/${itm.id}`)}>
