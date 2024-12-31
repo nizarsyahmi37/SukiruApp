@@ -1,6 +1,10 @@
+import { ThemeProvider } from "next-themes"
+import { ReactNode } from "react"
 import type { Metadata } from "next"
-import "./globals.css"
+
 import Layout from "@/components/modules/layout"
+
+import "./globals.css"
 
 export const metadata: Metadata = {
 	title: "Sukiru",
@@ -10,16 +14,20 @@ export const metadata: Metadata = {
 export default function RootLayout({
 	children,
 }: Readonly<{
-	children: React.ReactNode
+	children: ReactNode
 }>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`antialiased min-w-[100vw] min-h-[100vh] p-4`}
+				className={`antialiased min-w-[100vw] min-h-[100vh]`}
 			>
-				<Layout appId={process.env.PRIVY_APP_ID}>
-					{children}
-				</Layout>
+				<ThemeProvider
+					defaultTheme="dark"
+				>
+					<Layout appId={process.env.PRIVY_APP_ID}>
+						{children}
+					</Layout>
+				</ThemeProvider>
 			</body>
 		</html>
 	)

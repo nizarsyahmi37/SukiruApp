@@ -1,17 +1,17 @@
-import { getProjectInfo } from "@/lib/versions"
-import LoginWithPrivy from "@/components/modules/button/login/privy"
-import LoginWithFlow from "@/components/modules/button/login/flow"
-import LoginWithOKX from "@/components/modules/button/login/okx"
+import GigsListing from "@/components/modules/gigs/listing"
 
-export default function Home() {
+export default async function Page() {
+	const dataGigs = await fetch("https://sukiruapp.vercel.app/api/gigs")
+	const dataUsers = await fetch("https://sukiruapp.vercel.app/api/users")
+	const gigs = await dataGigs.json()
+	const users = await dataUsers.json()
+
 	return (
 		<div>
-			<h1 className="text-8xl font-bold text-center">
-				{getProjectInfo().title}
-			</h1>
-			<LoginWithPrivy />
-			<LoginWithFlow />
-			<LoginWithOKX />
+			<GigsListing
+				gigs={gigs}
+				users={users}
+			/>
 		</div>
 	)
 }

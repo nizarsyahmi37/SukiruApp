@@ -5,6 +5,7 @@ import { ReactNode, useEffect, useState } from "react"
 import { AuthContextProvider as FlowProvider} from "@/context/auth/flow"
 import { AuthContextProvider as OkxProvider} from "@/context/auth/okx"
 import "../../../flow-config"
+import Header from "../header"
 
 export default function Layout({
 	children,
@@ -33,9 +34,9 @@ export default function Layout({
 						appId={appId!}
 						config={{
 							appearance: {
-								theme: "light",
-								accentColor: "#676FFF",
-								logo: "https://cryptologos.cc/logos/flow-flow-logo.png", // Replace with your logo
+								theme: "#191B28",
+								accentColor: "#22273B",
+								logo: "/assets/brand/png/sukiru-lettermark-gold.png"
 							},
 							embeddedWallets: {
 								createOnLogin: "all-users",
@@ -90,6 +91,7 @@ export default function Layout({
 							],
 						}}
 					>
+						<Header />
 						{children}
 					</PrivyProvider>
 				</FlowProvider>
