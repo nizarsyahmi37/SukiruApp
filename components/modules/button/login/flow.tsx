@@ -29,7 +29,10 @@ export default function LoginWithFlow() {
 						</button>
 					</div>
 				) : (
-					<button onClick={logIn} className="button button-connect">
+					<button
+						onClick={logIn}
+						className="button button-connect bg-primary text-white font-semibold w-full py-2 rounded-md hover:bg-foreground hover:text-background transition"
+					>
 						Connect Wallet
 					</button>
 				)}

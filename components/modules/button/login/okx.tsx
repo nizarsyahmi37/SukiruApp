@@ -42,12 +42,9 @@ export default function LoginWithOKX() {
 					</div>
 				) : (
 					<div>
-						<p className="card-subtitle">
-							Connect your wallet with OKX
-						</p>
 						<button
 							onClick={logIn}
-							className="button button-connect"
+							className="button button-connect bg-primary text-white font-semibold w-full py-2 rounded-md hover:bg-foreground hover:text-background transition"
 						>
 							Connect OKX Wallet
 						</button>
