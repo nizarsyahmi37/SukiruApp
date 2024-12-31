@@ -42,8 +42,8 @@ export default function Layout({
 								createOnLogin: "all-users",
 							},
 							defaultChain: {
-								id: 747,
-								name: "Flow",
+								id: 545,
+								name: "EVM on Flow Testnet",
 								network: "flow",
 								nativeCurrency: {
 									name: "Flow",
@@ -53,21 +53,21 @@ export default function Layout({
 								rpcUrls: {
 									default: {
 										http: [
-											"https://mainnet.evm.nodes.onflow.org",
+											"https://testnet.evm.nodes.onflow.org",
 										],
 									},
 								},
 								blockExplorers: {
 									default: {
 										name: "Flowscan",
-										url: "https://evm.flowscan.io/",
+										url: "https://evm-testnet.flowscan.io/",
 									},
 								},
 							},
 							supportedChains: [
 								{
-									id: 747,
-									name: "Flow",
+									id: 545,
+									name: "EVM on Flow Testnet",
 									network: "flow",
 									nativeCurrency: {
 										name: "Flow",
@@ -77,14 +77,14 @@ export default function Layout({
 									rpcUrls: {
 										default: {
 											http: [
-												"https://mainnet.evm.nodes.onflow.org",
+												"	https://testnet.evm.nodes.onflow.org",
 											],
 										},
 									},
 									blockExplorers: {
 										default: {
 											name: "Flowscan",
-											url: "https://evm.flowscan.io/",
+											url: "https://evm-testnet.flowscan.io/",
 										},
 									},
 								},

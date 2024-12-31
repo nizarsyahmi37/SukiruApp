@@ -12,7 +12,7 @@ export default function Header() {
 			<div className="grid items-center">
 				<ImageDynamic
 					title={`Sukiru`}
-					className={`max-w-[150px] hidden md:block`}
+					className={`cursor-pointer max-w-[150px] hidden md:block hover:scale-[101%]`}
 					light={`/assets/brand/svg/sukiru-lettermark-dark.svg`}
 					dark={`/assets/brand/svg/sukiru-lettermark-light.svg`}
 					width={192}
@@ -23,7 +23,7 @@ export default function Header() {
 				/>
 				<ImageDynamic
 					title={`Sukiru`}
-					className={`max-w-[45px] block md:hidden`}
+					className={`cursor-pointer max-w-[45px] block md:hidden hover:scale-[101%]`}
 					light={`/assets/brand/svg/sukiru-icon-dark.svg`}
 					dark={`/assets/brand/svg/sukiru-icon-light.svg`}
 					width={150}
