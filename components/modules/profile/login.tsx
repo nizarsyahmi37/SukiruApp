@@ -3,12 +3,12 @@
 // import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { usePrivy } from "@privy-io/react-auth"
+import { Gigs, Skills, Users } from "@/lib/types/database"
+import { getGigByApplicant, getGigBySelected, getUserByEmail, getUserByTelegram, getUserByWallets } from "@/lib/helpers/database"
 import LoginWithFlow from "@/components/modules/button/login/flow"
 import LoginWithOKX from "@/components/modules/button/login/okx"
 import LoginWithPrivy from "@/components/modules/button/login/privy"
 import ProfileDisplay from "./display"
-import { Gigs, Skills, Users } from "@/lib/types/database"
-import { getGigByApplicant, getGigBySelected, getUserByEmail, getUserByTelegram, getUserByWallets } from "@/lib/helpers/database"
 import ProfileCreate from "./create"
 
 export default function ProfileLogin({

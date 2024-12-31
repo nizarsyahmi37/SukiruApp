@@ -46,7 +46,7 @@ export async function POST(request: Request) {
 	let response
 
 	if (type === "insert" && username && email && telegram_username && wallet_address) {
-		await sql`INSERT INTO sukiru_users (username, email, telegram_username, wallet_address) VALUES (${username}, ${email}, ${telegram_username}, ${wallet_address})`
+		await sql`INSERT INTO sukiru_users (id, username, email, telegram_username, wallet_address) VALUES (DEFAULT, ${username}, ${email}, ${telegram_username}, ${wallet_address})`
 	} else if (type === "update" && id && email) {
 		await sql`UPDATE sukiru_users SET email = ${email} WHERE id=${id}`
 	} else if (email && username) {
