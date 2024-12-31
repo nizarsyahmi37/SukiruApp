@@ -13,7 +13,10 @@ export async function GET(request: Request) {
 	const gig_skills = url.searchParams.get("gig_skills")?.split(',').map(Number)
 	const gig_creator = url.searchParams.get("gig_creator")
 	const gig_deadline = url.searchParams.get("gig_deadline")
-  
+	const gig_applicant = url.searchParams.get("gig_applicant")?.split(',').map(Number)
+	const gig_selected = url.searchParams.get("gig_selected")
+	const gig_reward = url.searchParams.get("gig_reward")
+
 	let query
 	if (gig_name) {
 		query = sql`SELECT * FROM sukiru_gigs WHERE gig_name = ${gig_name}`
@@ -25,6 +28,12 @@ export async function GET(request: Request) {
 		query = sql`SELECT * FROM sukiru_gigs WHERE gig_creator = ${gig_creator}`
 	} else if (gig_deadline) {
 		query = sql`SELECT * FROM sukiru_gigs WHERE gig_deadline = ${gig_deadline}`
+	} else if (gig_applicant && gig_applicant.length > 0) {
+		query = sql`SELECT * FROM sukiru_gigs WHERE gig_applicant && ${gig_applicant}::integer[]`
+	} else if (gig_selected) {
+		query = sql`SELECT * FROM sukiru_gigs WHERE gig_selected = ${gig_selected}`
+	} else if (gig_reward) {
+		query = sql`SELECT * FROM sukiru_gigs WHERE gig_reward = ${gig_reward}`
 	} else if (id) {
 		query = sql`SELECT * FROM sukiru_gigs WHERE id = ${id}`
 	} else {
@@ -48,13 +57,14 @@ export async function POST(request: Request) {
 	const gig_skills = url.searchParams.get("gig_skills")?.split(',').map(Number)
 	const gig_creator = url.searchParams.get("gig_creator")
 	const gig_deadline = url.searchParams.get("gig_deadline")
-  
+	const gig_reward = url.searchParams.get("gig_reward")
+
 	let response
 
-	if (gig_name && gig_description && gig_skills && gig_skills.length > 0 && gig_creator && gig_deadline) {
+	if (gig_name && gig_description && gig_skills && gig_skills.length > 0 && gig_creator && gig_deadline && gig_reward) {
 		try {
 			// Insert new gig
-			await sql`INSERT INTO sukiru_gigs (gig_name, gig_description, gig_skills, gig_creator, gig_deadline) VALUES (${gig_name}, ${gig_description}, ${gig_skills}, ${gig_creator}, ${gig_deadline})`
+			await sql`INSERT INTO sukiru_gigs (gig_name, gig_description, gig_skills, gig_creator, gig_deadline, gig_reward) VALUES (${gig_name}, ${gig_description}, ${gig_skills}, ${gig_creator}, ${gig_deadline}, ${gig_reward})`
 			response = {
 				success: true,
 				message: "Gig added successfully"
