@@ -36,7 +36,7 @@ export default function ProfileLogin({
 		const usrTg = getUserByTelegram(users, user?.telegram?.username ? user?.telegram?.username : "")
 		const usrWal = getUserByWallets(users, user?.wallet?.address ? [user?.wallet?.address] : [""])
 		const usr = usrEmail ? usrEmail : usrTg ? usrTg : usrWal ? usrWal : undefined
-		if (!usr && usr !== undefined) {
+		if (usr && usr !== undefined) {
 			const applicant = getGigByApplicant(gigs, usr?.id)
 			const selected = getGigBySelected(gigs, usr?.id)
 			
