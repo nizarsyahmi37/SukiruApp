@@ -37,16 +37,18 @@ export default function ProfileLogin({
 		const usrWal = getUserByWallets(users, user?.wallet?.address ? [user?.wallet?.address] : [""])
 		const usr = usrEmail ? usrEmail : usrTg ? usrTg : usrWal ? usrWal : undefined
 		if (usr) {
-			const applicant = getGigByApplicant(gigs, usr?.id)
-			const selected = getGigBySelected(gigs, usr?.id)
+			const applicant = getGigByApplicant(gigs, 2)
+			const selected = getGigBySelected(gigs, 2)
+			
+			console.log(selected)
 			return (
 				<div>
 					<ProfileDisplay
 						usr={usr as Users}
 						users={users}
 						skills={skills}
-						applied={[applicant] as Gigs[]}
-						selected={[selected] as Gigs[]}
+						applied={applicant}
+						selected={selected}
 					/>
 				</div>
 			)

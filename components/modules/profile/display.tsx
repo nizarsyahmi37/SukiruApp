@@ -17,8 +17,8 @@ export default function ProfileDisplay({
 	users: Users[]
 	skills: Skills[]
 	usr: Users
-	applied: Gigs[]
-	selected: Gigs[]
+	applied: Gigs[] | undefined
+	selected: Gigs[] | undefined
 }) {
 	const router = useRouter()
 
@@ -77,7 +77,7 @@ export default function ProfileDisplay({
 					Hired Job
 				</h2>
 				<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 max-w-full flex-wrap">
-					{selected ? (
+					{selected && selected !== undefined && selected.length > 0 ? (
 						selected.map((itm: Gigs) => (
 							<div key={`job-${itm?.id}`} className="cursor-pointer p-4 rounded-md border border-primary duration-150 ease-in-out hover:border-foreground hover:scale-[101%]" onClick={() => router.push(`/gigs/${itm?.id}`)}>
 								<p className="py-1 px-2 text-sm rounded-md bg-foreground text-background w-fit mb-2 font-bold">
@@ -102,7 +102,7 @@ export default function ProfileDisplay({
 					Applied Job
 				</h2>
 				<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 max-w-full flex-wrap">
-					{applied ? (
+					{applied && applied !== undefined && applied.length > 0 ? (
 						applied.map((itm: Gigs) => (
 							<div key={`job-${itm?.id}`} className="cursor-pointer p-4 rounded-md border border-primary duration-150 ease-in-out hover:border-foreground hover:scale-[101%]" onClick={() => router.push(`/gigs/${itm?.id}`)}>
 								<p className="py-1 px-2 text-sm rounded-md bg-foreground text-background w-fit mb-2 font-bold">

@@ -31,13 +31,13 @@ export function getSkillById(skills: Skills[], id: number) {
 }
 
 export function getGigBySelected(gigs: Gigs[], id: number) {
-	const gig = gigs.find(gig => gig.gig_selected === id)
+	const gig = gigs.filter(gig => gig.gig_selected === id)
 	
 	return (gig)
 }
 
 export function getGigByApplicant(gigs: Gigs[], id: number) {
-	const gig = gigs.find(gig => gig.gig_applicant.includes(id))
+	const gig = gigs.filter(gig => gig.gig_applicant.includes(id))
 	
 	return (gig)
 }
