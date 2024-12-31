@@ -31,16 +31,15 @@ export default function ProfileLogin({
 		check()
 	}, [authenticated, user]);
 
-	if (authenticated && user?.email?.address) {
+	if (!authenticated && user?.email?.address) {
 		const usrEmail = getUserByEmail(users, user?.email?.address)
 		const usrTg = getUserByTelegram(users, user?.telegram?.username ? user?.telegram?.username : "")
 		const usrWal = getUserByWallets(users, user?.wallet?.address ? [user?.wallet?.address] : [""])
 		const usr = usrEmail ? usrEmail : usrTg ? usrTg : usrWal ? usrWal : undefined
-		if (usr) {
+		if (usr && usr !== undefined) {
 			const applicant = getGigByApplicant(gigs, 2)
 			const selected = getGigBySelected(gigs, 2)
 			
-			console.log(selected)
 			return (
 				<div>
 					<ProfileDisplay
