@@ -39,11 +39,15 @@ export async function POST(request: Request) {
 	const email = url.searchParams.get("email")
 	const username = url.searchParams.get("username")
 	const id = url.searchParams.get("id")
+	const telegram_username = url.searchParams.get("telegram_username")
+	const wallet_address = url.searchParams.get("wallet_address")
 	const type = url.searchParams.get("type")
   
 	let response
 
-	if (type === "update" && id && email) {
+	if (type === "insert" && username && email && telegram_username && wallet_address) {
+		await sql`INSERT INTO sukiru_users (username, email, telegram_username, wallet_address) VALUES (${username}, ${email}, ${telegram_username}, ${wallet_address})`
+	} else if (type === "update" && id && email) {
 		await sql`UPDATE sukiru_users SET email = ${email} WHERE id=${id}`
 	} else if (email && username) {
 		try {
