@@ -15,7 +15,7 @@ export default function GigsAdd({
 }: {
 	skills: Skills[]
 	users: Users[]
-	database: string
+	database: string | undefined
 }) {
 	const { user } = usePrivy()
 
@@ -30,7 +30,7 @@ export default function GigsAdd({
 	
 	const handleAddGig = async () => {
         try {  
-			const sql = neon(database)
+			const sql = neon(database ? database.toString() : "")
 			
 			await sql`INSERT INTO sukiru_gigs (gig_name, gig_description, gig_skills, gig_creator, gig_deadline, gig_reward) VALUES (${title}, ${description}, ${skill}, ${creator}, ${date}, ${reward})`
             // const response = await axios.post(
