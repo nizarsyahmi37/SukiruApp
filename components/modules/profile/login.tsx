@@ -37,8 +37,40 @@ export default function ProfileLogin({
 		const usrWal = getUserByWallets(users, user?.wallet?.address ? [user?.wallet?.address] : [""])
 		const usr = usrEmail ? usrEmail : usrTg ? usrTg : usrWal ? usrWal : undefined
 		if (usr && usr !== undefined) {
-			const applicant = getGigByApplicant(gigs, 2)
-			const selected = getGigBySelected(gigs, 2)
+			const applicant = getGigByApplicant(gigs, usr?.id)
+			const selected = getGigBySelected(gigs, usr?.id)
+			
+			return (
+				<div>
+					<ProfileDisplay
+						usr={usr as Users}
+						users={users}
+						skills={skills}
+						applied={applicant}
+						selected={selected}
+					/>
+				</div>
+			)
+		} else {
+			return (
+				<div>
+					<ProfileCreate
+						usr={usr || []}
+						email={user?.email}
+						telegram={user?.telegram}
+						wallet={user?.wallet?.address ? [user?.wallet?.address] : [""]}
+					/>
+				</div>
+			)
+		}
+	} else if (authenticated && user?.telegram?.username) {
+		const usrEmail = getUserByEmail(users, user?.email?.address ? user?.email?.address : "")
+		const usrTg = getUserByTelegram(users, user?.telegram?.username ? user?.telegram?.username : "")
+		const usrWal = getUserByWallets(users, user?.wallet?.address ? [user?.wallet?.address] : [""])
+		const usr = usrEmail ? usrEmail : usrTg ? usrTg : usrWal ? usrWal : undefined
+		if (usr && usr !== undefined) {
+			const applicant = getGigByApplicant(gigs, usr?.id)
+			const selected = getGigBySelected(gigs, usr?.id)
 			
 			return (
 				<div>

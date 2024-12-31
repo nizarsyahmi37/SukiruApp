@@ -36,10 +36,6 @@ export default function LoginWithPrivy() {
 					</div>
 				) : (
 					<div>
-						<h1 className="card-title text-black">Sign In</h1>
-						<p className="card-subtitle text-gray-600">
-							Connect with Privy to get started
-						</p>
 						<button
 							onClick={login}
 							className="button button-connect bg-primary text-white font-semibold w-full py-2 rounded-md hover:bg-foreground hover:text-background transition"
@@ -48,13 +44,6 @@ export default function LoginWithPrivy() {
 						</button>
 					</div>
 				)}
-										<button
-							onClick={linkWallet}
-							className="button button-connect bg-primary text-white font-semibold w-full py-2 rounded-md hover:bg-foreground hover:text-background transition"
-						>
-							Link Wallet
-						</button>
-
 			</div>
 		</div>
 	)

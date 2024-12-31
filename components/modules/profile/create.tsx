@@ -12,7 +12,7 @@ export default function ProfileCreate({
 	wallet
 } : {
 	usr: Users[]
-	email: Email
+	email: Email | undefined
 	telegram: Telegram | undefined
 	wallet: string[]
 }) {
